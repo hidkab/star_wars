@@ -87,8 +87,11 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-h1,p {
+h1,p,a {
   color:orange;
+}
+.col-12 {
+  height: 12vh;
 }
 
 
