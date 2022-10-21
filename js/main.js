@@ -1,29 +1,28 @@
-// Function to create the cards
-function makecol(){
-    let col = document.createElement("div");
-    col.classList.add("col-12 col-sm-6 col-lg-4 bg-dark  my-1");
 
-}
-
-
-function showTrarWars() {
+function showSrarWars() {
     let httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = function() {
-        let swapiContent = document.getElementById("swapiContent");
+        let swapiContent = document.querySelector(".swapiContent");
         if (httpRequest.readyState === XMLHttpRequest.DONE) {
             if (httpRequest.status === 200) {
                 let result = JSON.parse(httpRequest.responseText);
-                
+                for (let key in result) {
+                        swapiContent.innerHTML += `
+                            
+                                <div class="mx-2 card border border-warning text-center bg-dark p-4 mb-5 rounded>
+                                    <h5 class="card-title"><a href="${ result[key] }"target=_blank"> ${ key.toUpperCase() } </a</h5>
+                                </div> `;  
+                }
             }   
             else {
-                swapiContent.innerText = "Nous n'avons pas réussi à récupérer le contenu";
+                swapiContent.innerHTML = `<div class="error-message">
+                                            <p>Nous n'avons pas réussi à récupérer le contenu</p>
+                                         </div>`;
             }
         } 
-        else {
-            swapiContent.innerText = "Requête en cours";
-        }
     };
 
-    httpRequest.open('GET', 'http https://swapi.dev/api/', true);
+    httpRequest.open('GET', 'https://swapi.dev/api/', true);
     httpRequest.send();
 }
+showSrarWars();
